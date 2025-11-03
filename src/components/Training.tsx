@@ -7,20 +7,9 @@ const Training = () => {
 	return (
 		<>
 		{/* Title band themed from cover image */}
-		<section id="training" className="relative py-12 overflow-hidden">
-			<div 
-				className="absolute inset-0 -z-10"
-				style={{ 
-					backgroundImage: `url(${coverImage})`,
-					backgroundSize: 'cover',
-					backgroundPosition: 'center',
-					filter: 'blur(16px) saturate(120%)',
-					transform: 'scale(1.05)'
-				}}
-			/>
-			<div className="absolute inset-0 -z-10 bg-black/50" />
-			<div className="container mx-auto px-4 text-center">
-				<h1 className="text-4xl md:text-5xl font-bold text-white">Upwork Training by Muhammad Ali - Bideez</h1>
+		<section id="training" className="py-12">
+			<div className="container mx-auto px-4">
+				<h1 className="text-4xl md:text-5xl font-bold text-primary text-center">Upwork Training by Muhammad Ali - Bideez</h1>
 			</div>
 		</section>
 		{/* Hero / Cover Section */}
@@ -28,7 +17,7 @@ const Training = () => {
 			<img 
 				src={coverImage} 
 				alt="Upwork Training Cover"
-				className="w-full h-screen object-cover"
+				className="w-full h-[70vh] object-cover"
 			/>
 		</section>
 
