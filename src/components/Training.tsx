@@ -13,7 +13,7 @@ const Training = () => {
 			<img 
 				src={coverImage} 
 				alt="Upwork Training Cover"
-				className="w-full h-[70vh] object-cover"
+				className="w-full h-[60vh] md:h-[65vh] lg:h-[70vh] object-cover"
 			/>
 		</section>
 
@@ -47,7 +47,7 @@ const Training = () => {
 				}}
 			/>
 			{/* Dark overlay for contrast */}
-			<div className="absolute inset-0 -z-10 bg-black/60" />
+			<div className="absolute inset-0 -z-10 bg-black/50" />
 
 			<div className="container mx-auto px-4">
 				<div className="max-w-4xl mx-auto text-center mb-12">
