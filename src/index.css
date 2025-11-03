@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 215 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    /* Professional Blue - Primary Brand */
+    --primary: 215 85% 35%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 215 85% 55%;
+
+    /* Vibrant Orange - CTA & Success */
+    --secondary: 25 95% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 215 15% 95%;
+    --muted-foreground: 215 15% 45%;
+
+    --accent: 215 85% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 15% 88%;
+    --input: 215 15% 88%;
+    --ring: 215 85% 35%;
+
+    --radius: 0.75rem;
+
+    /* Custom Design Tokens */
+    --success: 145 65% 45%;
+    --success-foreground: 0 0% 100%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(215 85% 35%), hsl(215 85% 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(25 95% 55%), hsl(35 95% 60%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%), hsl(215 25% 98%));
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px hsl(215 25% 15% / 0.05);
+    --shadow-md: 0 4px 16px hsl(215 25% 15% / 0.08);
+    --shadow-lg: 0 8px 32px hsl(215 25% 15% / 0.12);
+    --shadow-glow: 0 0 40px hsl(215 85% 55% / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 215 30% 8%;
+    --foreground: 215 15% 95%;
+
+    --card: 215 25% 12%;
+    --card-foreground: 215 15% 95%;
+
+    --popover: 215 25% 12%;
+    --popover-foreground: 215 15% 95%;
+
+    --primary: 215 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 215 85% 65%;
+
+    --secondary: 25 95% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 215 25% 18%;
+    --muted-foreground: 215 15% 65%;
+
+    --accent: 215 85% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 25% 20%;
+    --input: 215 25% 20%;
+    --ring: 215 85% 55%;
+
+    --success: 145 65% 55%;
+    --success-foreground: 0 0% 100%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(215 85% 25%), hsl(215 85% 45%));
+    --gradient-accent: linear-gradient(135deg, hsl(25 95% 45%), hsl(35 95% 50%));
+    --gradient-subtle: linear-gradient(180deg, hsl(215 30% 8%), hsl(215 25% 12%));
+
+    --shadow-sm: 0 2px 8px hsl(0 0% 0% / 0.2);
+    --shadow-md: 0 4px 16px hsl(0 0% 0% / 0.3);
+    --shadow-lg: 0 8px 32px hsl(0 0% 0% / 0.4);
+    --shadow-glow: 0 0 40px hsl(215 85% 55% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .gradient-subtle {
+    background: var(--gradient-subtle);
+  }
+
+  .shadow-elegant {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
