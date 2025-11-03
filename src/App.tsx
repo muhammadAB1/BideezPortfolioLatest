@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Training from "./pages/Training";
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/training" element={<Training />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
