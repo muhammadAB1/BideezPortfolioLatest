@@ -1,7 +1,8 @@
-const imgProfile = "/images/profile.jpeg";
-const imgJob = "/images/job.jpeg";
-const imgProposal = "/images/proposal.jpeg";
-const imgBoosting = "/images/boosting.jpeg";
+const PUBLIC_BASE = (import.meta as any).env?.BASE_URL ?? "/";
+const imgProfile = `${PUBLIC_BASE}images/profile.jpeg`;
+const imgJob = `${PUBLIC_BASE}images/job.jpeg`;
+const imgProposal = `${PUBLIC_BASE}images/proposal.jpeg`;
+const imgBoosting = `${PUBLIC_BASE}images/boosting.jpeg`;
 // Load any matching resized image from src/images, tolerant to exact filename
 const images = import.meta.glob("../images/*imresizer*.{jpg,jpeg,png,webp}", { eager: true, as: "url" }) as Record<string, string>;
 const coverImage = Object.values(images)[0] ?? new URL("../images/ChatGPT Image Nov 3, 2025, 02_33_57 PM (1).png", import.meta.url).href;
