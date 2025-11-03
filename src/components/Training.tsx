@@ -10,11 +10,15 @@ const Training = () => {
 		{/* Title will be placed below the image */}
 		{/* Hero / Cover Section */}
 		<section className="w-full">
-			<img 
-				src={coverImage} 
-				alt="Upwork Training Cover"
-				className="w-full h-[60vh] md:h-[65vh] lg:h-[70vh] object-cover"
-			/>
+			<div className="container mx-auto px-4">
+				<div className="max-w-5xl mx-auto">
+					<img 
+						src={coverImage} 
+						alt="Upwork Training Cover"
+						className="w-full h-[40vh] md:h-[50vh] object-contain bg-black/5 rounded-lg shadow-elegant"
+					/>
+				</div>
+			</div>
 		</section>
 
 		{/* Title below the image */}
