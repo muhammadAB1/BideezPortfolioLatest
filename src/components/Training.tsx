@@ -1,15 +1,32 @@
 import { BookOpen, Send, Workflow } from "lucide-react";
-import coverImage from "@/images/ChatGPT Image Nov 3, 2025, 02_33_57 PM (1).png";
+const coverImage = new URL("../images/ChatGPT Image Nov 3,..._imresizer.jpg", import.meta.url).href;
 
 const Training = () => {
 	return (
 		<>
+		{/* Title band themed from cover image */}
+		<section className="relative py-12 overflow-hidden">
+			<div 
+				className="absolute inset-0 -z-10"
+				style={{ 
+					backgroundImage: `url(${coverImage})`,
+					backgroundSize: 'cover',
+					backgroundPosition: 'center',
+					filter: 'blur(16px) saturate(120%)',
+					transform: 'scale(1.05)'
+				}}
+			/>
+			<div className="absolute inset-0 -z-10 bg-black/50" />
+			<div className="container mx-auto px-4 text-center">
+				<h1 className="text-4xl md:text-5xl font-bold text-white">Upwork Training by Muhammad Ali - Bideez</h1>
+			</div>
+		</section>
 		{/* Hero / Cover Section */}
 		<section className="w-full">
 			<img 
 				src={coverImage} 
 				alt="Upwork Training Cover"
-				className="w-full h-[60vh] object-cover"
+				className="w-full h-screen object-cover"
 			/>
 		</section>
 
@@ -31,7 +48,7 @@ const Training = () => {
 
 			<div className="container mx-auto px-4">
 				<div className="max-w-4xl mx-auto text-center mb-12">
-					<h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Upwork Training by Muhammad Ali - Bideez</h1>
+					<h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">What You'll Learn</h2>
 					<p className="text-lg md:text-xl text-white/80">
 						Practical, results-focused training for Upwork success and client conversion.
 					</p>
