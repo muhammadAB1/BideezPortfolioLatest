@@ -39,28 +39,32 @@ const Training = () => {
 				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 					{/* Profile Optimization */}
 					<div className="group relative rounded-2xl p-[1px] bg-gradient-to-br from-primary/40 via-secondary/40 to-success/40 transition-transform duration-300 hover:scale-[1.02]">
-						<div className="rounded-2xl h-full bg-card p-6 shadow-elegant transition-shadow duration-300 group-hover:shadow-xl flex items-center justify-center">
+						<div className="rounded-2xl h-full bg-card p-6 shadow-elegant transition-shadow duration-300 group-hover:shadow-xl flex flex-col items-center">
+							<h3 className="text-base font-semibold text-foreground mb-3 text-center">Profile Optimization</h3>
 							<img src={imgProfile} alt="Profile" className="w-full h-40 md:h-44 object-contain" />
 						</div>
 					</div>
 
 					{/* Job Selection */}
 					<div className="group relative rounded-2xl p-[1px] bg-gradient-to-br from-secondary/40 via-primary/40 to-success/40 transition-transform duration-300 hover:scale-[1.02]">
-						<div className="rounded-2xl h-full bg-card p-6 shadow-elegant transition-shadow duration-300 group-hover:shadow-xl flex items-center justify-center">
+						<div className="rounded-2xl h-full bg-card p-6 shadow-elegant transition-shadow duration-300 group-hover:shadow-xl flex flex-col items-center">
+							<h3 className="text-base font-semibold text-foreground mb-3 text-center">Job Selection</h3>
 							<img src={imgJob} alt="Job" className="w-full h-40 md:h-44 object-contain" />
 						</div>
 					</div>
 
 					{/* Proposal Writing */}
 					<div className="group relative rounded-2xl p-[1px] bg-gradient-to-br from-success/40 via-primary/40 to-secondary/40 transition-transform duration-300 hover:scale-[1.02]">
-						<div className="rounded-2xl h-full bg-card p-6 shadow-elegant transition-shadow duration-300 group-hover:shadow-xl flex items-center justify-center">
+						<div className="rounded-2xl h-full bg-card p-6 shadow-elegant transition-shadow duration-300 group-hover:shadow-xl flex flex-col items-center">
+							<h3 className="text-base font-semibold text-foreground mb-3 text-center">Proposal Writing</h3>
 							<img src={imgProposal} alt="Proposal" className="w-full h-40 md:h-44 object-contain" />
 						</div>
 					</div>
 
 					{/* Boosting Proposals */}
 					<div className="group relative rounded-2xl p-[1px] bg-gradient-to-br from-primary/40 via-success/40 to-secondary/40 transition-transform duration-300 hover:scale-[1.02]">
-						<div className="rounded-2xl h-full bg-card p-6 shadow-elegant transition-shadow duration-300 group-hover:shadow-xl flex items-center justify-center">
+						<div className="rounded-2xl h-full bg-card p-6 shadow-elegant transition-shadow duration-300 group-hover:shadow-xl flex flex-col items-center">
+							<h3 className="text-base font-semibold text-foreground mb-3 text-center">Boosting Proposals</h3>
 							<img src={imgBoosting} alt="Boosting" className="w-full h-40 md:h-44 object-contain" />
 						</div>
 					</div>
