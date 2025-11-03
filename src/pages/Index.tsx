@@ -10,6 +10,7 @@ import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import LinkedInFloat from "@/components/LinkedinFloat";
+import Training from "@/components/Training";
 
 const Index = () => {
   return (
@@ -23,6 +24,7 @@ const Index = () => {
       <CEO />
       <Testimonials />
       <Blog />
+      <Training />
       <Contact />
       <Footer />
       <LinkedInFloat />
