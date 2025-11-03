@@ -6,7 +6,7 @@ const Training = () => {
 		{/* Hero / Cover Section */}
 		<section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
 			<img 
-				src="https://drive.google.com/file/d/102yKcF5V5xCDlXwU5vGCEDaz67sNqt3x/view?usp=sharing" 
+				src="https://ibb.co/VWpg1z82" 
 				alt="Upwork Training Cover"
 				className="absolute inset-0 w-full h-full object-cover"
 			/>
