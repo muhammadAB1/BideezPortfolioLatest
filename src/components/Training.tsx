@@ -1,12 +1,11 @@
 // Load any matching resized image from src/images, tolerant to exact filename
 const images = import.meta.glob("../images/*imresizer*.{jpg,jpeg,png,webp}", { eager: true, as: "url" }) as Record<string, string>;
-const assetVersion = "1"; // bump this if images update but names stay the same
-const coverImage = (Object.values(images)[0] ?? new URL("../images/ChatGPT Image Nov 3, 2025, 02_33_57 PM (1).png", import.meta.url).href) + `?v=${assetVersion}`;
-// Segment images
-const imgProfile = new URL("../images/profile.jpeg", import.meta.url).href + `?v=${assetVersion}`;
-const imgJob = new URL("../images/job.jpeg", import.meta.url).href + `?v=${assetVersion}`;
-const imgProposal = new URL("../images/proposal.jpeg", import.meta.url).href + `?v=${assetVersion}`;
-const imgBoosting = new URL("../images/boosting.jpeg", import.meta.url).href + `?v=${assetVersion}`;
+const coverImage = Object.values(images)[0] ?? new URL("../images/ChatGPT Image Nov 3, 2025, 02_33_57 PM (1).png", import.meta.url).href;
+// Segment images via static imports for reliability
+import imgProfile from "@/images/profile.jpeg";
+import imgJob from "@/images/job.jpeg";
+import imgProposal from "@/images/proposal.jpeg";
+import imgBoosting from "@/images/boosting.jpeg";
 
 const Training = () => {
 	return (
