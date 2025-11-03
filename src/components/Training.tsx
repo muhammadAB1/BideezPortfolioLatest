@@ -23,14 +23,7 @@ const Training = () => {
 		{/* Title below the image */}
 		<section id="training" className="py-12">
 			<div className="container mx-auto px-4">
-				<h1 
-					className="text-4xl md:text-5xl font-bold text-center text-transparent bg-clip-text drop-shadow-lg"
-					style={{ 
-						backgroundImage: `url(${coverImage})`, 
-						backgroundSize: 'cover', 
-						backgroundPosition: 'center' 
-					}}
-				>
+				<h1 className="text-4xl md:text-5xl font-bold text-center text-primary">
 					Upwork Training by Muhammad Ali - Bideez
 				</h1>
 			</div>
