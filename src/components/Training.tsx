@@ -1,11 +1,13 @@
 import { BookOpen, Send, Workflow } from "lucide-react";
-const coverImage = new URL("../images/ChatGPT Image Nov 3,..._imresizer.jpg", import.meta.url).href;
+// Load any matching resized image from src/images, tolerant to exact filename
+const images = import.meta.glob("../images/*imresizer*.{jpg,jpeg,png,webp}", { eager: true, as: "url" }) as Record<string, string>;
+const coverImage = Object.values(images)[0] ?? new URL("../images/ChatGPT Image Nov 3, 2025, 02_33_57 PM (1).png", import.meta.url).href;
 
 const Training = () => {
 	return (
 		<>
 		{/* Title band themed from cover image */}
-		<section className="relative py-12 overflow-hidden">
+		<section id="training" className="relative py-12 overflow-hidden">
 			<div 
 				className="absolute inset-0 -z-10"
 				style={{ 
@@ -31,7 +33,7 @@ const Training = () => {
 		</section>
 
 		{/* Main Content themed from cover image */}
-		<section id="training" className="relative py-24 overflow-hidden">
+		<section className="relative py-24 overflow-hidden">
 			{/* Ambient blurred background based on cover image */}
 			<div 
 				className="absolute inset-0 -z-10"
