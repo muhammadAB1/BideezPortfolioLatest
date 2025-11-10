@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Images, Quote } from "lucide-react";
+import { Quote } from "lucide-react";
 import img1 from "../images/Valentin pic.jpeg";
 import img2 from "../images/waqar.jpeg";
 import img3 from "../images/Kamran pic.png";
