@@ -1,37 +1,45 @@
 import { Card } from "@/components/ui/card";
 import { Linkedin } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import img1 from "../images/Abrar.png";
+import img2 from "../images/Hasan.png";
+import img3 from "../images/Ali.png";
+import img4 from "../images/Sarah.jpg";
+import img5 from "../images/Shafaq.jpg";
+
+
+
 
 const teamMembers = [
   {
     name: "Muhammad Ali",
     role: "CEO & Business Development Manager",
-    image: "https://media.licdn.com/media/AAYQAQSOAAgAAQAAAAAAAB-zrMZEDXI2T62PSuT6kpB6qg.png",
+    image: img3,
     linkedin: "https://www.linkedin.com/in/talibji/",
     description: "Visionary leader with 7+ years of experience in driving business growth and building high-performing remote teams. Expert in crafting winning strategies for project acquisition and long-term client relationships.",
   },
   {
     name: "Abrar",
     role: "Senior Business Executive & Web Developer",
-    image: "https://media.licdn.com/dms/image/v2/D4D35AQF6agOvXadMhg/profile-framedphoto-shrink_800_800/profile-framedphoto-shrink_800_800/0/1718275876646?e=1755529200&v=beta&t=17NGkinfgj5ugJBHQwCkF5m7_B67lsg-mqge8HoN2EY",
+    image: img1,
     description: "Combines strong business acumen with exceptional web development skills to deliver tailored digital solutions. Skilled in managing client relationships while building functional, scalable websites.",
   },
   {
     name: "Sarah",
     role: "Senior Upwork Bidder, Artist & Graphic Designer",
-    image: "https://media.licdn.com/dms/image/v2/D4D35AQEJrVR3iGiGaA/profile-framedphoto-shrink_800_800/profile-framedphoto-shrink_800_800/0/1709575820202?e=1755529200&v=beta&t=Q4K3jeFGNx1HBXfjoAsE3AAmhcEvv_q6WsMNt4EPBBI",
+    image: img4,
     description: "A creative professional who blends business expertise with artistic vision. Specializes in crafting compelling proposals and delivering stunning visual designs.",
   },
   {
     name: "Hasan",
     role: "Senior Upwork Bidder & Marketing Head",
-    image: "https://media.licdn.com/dms/image/v2/D4D03AQEUo58IMgtT_A/profile-displayphoto-crop_800_800/B4DZhHa5L2G8AI-/0/1753544894486?e=1757548800&v=beta&t=-4uTlZOVk_tQRjcbDyJsYGBuHGw5ei15B6rKKJkLaMA",
+    image: img2,
     description: "Strategic thinker with a flair for persuasive communication and client engagement. Leads marketing initiatives that amplify brand reach and conversion rates.",
   },
   {
     name: "Shafaq",
     role: "Business Developer & Sales Head",
-    image: "",
+    image: img5,
     description: "Results-driven professional focused on generating high-value leads and closing impactful deals. Expert in aligning sales strategies with business goals for maximum growth.",
   },
 ];

@@ -1,12 +1,41 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp } from "lucide-react";
+import img1 from "../images/Hassan SS.png";
+import img2 from "../images/Usman.png";
+import img3 from "../images/GaiyoorUpwork.jpg";
+import img4 from "../images/AkashaUpwork.png";
+import img5 from "../images/muaqib.png";
+import img6 from "../images/shahriyar.png";
+
 
 const portfolioItems = [
   {
+    name: "Syed Hassan",
+    role: "Amazon PPC Manager",
+    image: img1,
+    achievements: [
+      "$100K+ total earnings",
+      "Top Rated Plus with 100% Job Success",
+      "11,000+ hours worked",
+      "Trusted long-term client base"
+    ],
+  },
+  {
+    name: "Usman",
+    role: "Salesforce",
+    image: img2,
+    achievements: [
+      "$100K+ total earnings",
+      "Top Rated Plus with 100% Job Success",
+      "8,000+ hours worked",
+      "Trusted long-term client base"
+    ],
+  },
+  {
     name: "Syed Gaiyoor H.",
     role: "Google Ads Specialist",
-    image: "https://drive.google.com/uc?export=view&id=1tbGJNPAqfnim3E3bRlb4gmZqlQ2-kE3a",
+    image: img3,
     achievements: [
       "$20K+ in earnings",
       "93% Job Success & Top Rated Badge",
@@ -17,7 +46,7 @@ const portfolioItems = [
   {
     name: "Akasha Y.",
     role: "Brand Identity & Logo Design",
-    image: "https://drive.google.com/uc?export=view&id=1IN00ruHQTdsElnHdKWPo3tyFGcee8yZl",
+    image: img4,
     achievements: [
       "$70K+ in Total Earnings",
       "95% Job Success Score & Top Rated Badge",
@@ -28,7 +57,7 @@ const portfolioItems = [
   {
     name: "Shahriyar",
     role: "Graphic & Brand Identity Designer",
-    image: "https://drive.google.com/uc?export=view&id=17otx0WYX2btf5R1Y3lKzuZqonAzYfo7t",
+    image: img6,
     achievements: [
       "$15K+ earnings in design projects",
       "95%+ Job Success Score",
@@ -39,23 +68,12 @@ const portfolioItems = [
   {
     name: "Muaqib",
     role: "Full Stack Web Developer",
-    image: "https://drive.google.com/uc?export=view&id=1irXCX6o9HKIZ-q73FM6b8JaH7B1q7pUA",
+    image: img5,
     achievements: [
       "$18K+ earnings in web development",
       "97% Job Success Score",
       "45+ successful projects",
       "Long-term and repeat clients"
-    ],
-  },
-  {
-    name: "Syed Hassan",
-    role: "Amazon PPC Manager",
-    image: "https://drive.google.com/uc?export=view&id=1NmWLf01jjkQqhuPIWZrM8vm4dtq-nYPB",
-    achievements: [
-      "$100K+ total earnings",
-      "Top Rated Plus with 100% Job Success",
-      "11,000+ hours worked",
-      "Trusted long-term client base"
     ],
   },
 ];
@@ -74,9 +92,9 @@ const Portfolio = () => {
             <Card key={index} className="overflow-hidden shadow-md hover:shadow-elegant transition-smooth group">
               <div className="aspect-video relative overflow-hidden bg-muted">
                 <img 
-                  src={item.image} 
+                  src={item.image}
                   alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-smooth"
+                  className="w-full h-full object-contain group-hover:scale-105 transition-smooth bg-white"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               </div>

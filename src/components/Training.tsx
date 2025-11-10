@@ -1,7 +1,9 @@
-const imgProfile = "/images/profile.jpeg.jpg";
-const imgJob = "/images/job.jpeg.jpg";
-const imgProposal = "/images/proposal.jpeg.jpg";
-const imgBoosting = "/images/boosting.jpeg.jpg";
+// Importing 4 images from the images folder inside src by different names
+import imgProfile from "../images/profile.jpg";
+import imgJob from "../images/job.jpg";
+import imgProposal from "../images/proposal.jpg";
+import imgBoosting from "../images/boosting.jpg";
+
 // Load any matching resized image from src/images, tolerant to exact filename
 const images = import.meta.glob("../images/*imresizer*.{jpg,jpeg,png,webp}", { eager: true, as: "url" }) as Record<string, string>;
 const coverImage = Object.values(images)[0] ?? new URL("../images/ChatGPT Image Nov 3, 2025, 02_33_57 PM (1).png", import.meta.url).href;
