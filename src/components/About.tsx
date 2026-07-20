@@ -6,20 +6,23 @@ const About = () => {
     <section id="about" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary">About Bideez ORG</h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">Smart Bidding, Real Results</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary">About Bideez</h2>
+          <p className="text-xl text-muted-foreground leading-relaxed">Turning Clicks Into Customers</p>
         </div>
-        
+
         <div className="max-w-5xl mx-auto space-y-12">
           <Card className="p-8 md:p-12 shadow-elegant transition-smooth hover:shadow-xl">
             <p className="text-lg text-foreground leading-relaxed mb-6">
-              Bideez is a remotely managed team of experienced Business Developers, specializing in winning high-value projects on Upwork and LinkedIn. Since 2018, we've been helping freelancers and agencies boost their success rates with targeted research, persuasive proposals, and proven bidding strategies.
+              Bideez is a performance-driven digital growth agency helping businesses generate qualified leads, increase sales, and scale through Google Ads (PPC), Meta Ads, Upwork Lead Generation, and LinkedIn Outreach.
+            </p>
+            <p className="text-lg text-foreground leading-relaxed mb-6">
+              Since 2018, we've partnered with startups, agencies, and growing businesses to build predictable client acquisition systems. By combining data-driven marketing, strategic business development, and proven outreach methodologies, we help our clients reach the right audience and achieve measurable business growth.
             </p>
             <p className="text-lg text-foreground leading-relaxed">
-              Our journey began with our very first client, Technology Plex, a well-known software company in Pakistan and the United States. From that first win to now partnering with clients worldwide, we've spent over 7 years refining our approach to make project acquisition smarter, faster, and more effective. At Bideez, we don't just bid — we build lasting opportunities.
+              Our mission is simple: deliver quality opportunities, measurable results, and long-term partnerships. Whether it's running high-performing advertising campaigns or generating B2B leads through targeted outreach, we focus on strategies that create real business impact.
             </p>
           </Card>
-          
+
           <div className="grid md:grid-cols-3 gap-6">
             <Card className="p-6 text-center shadow-md hover:shadow-elegant transition-smooth">
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
@@ -28,7 +31,7 @@ const About = () => {
               <h3 className="text-xl font-semibold mb-2">7+ Years</h3>
               <p className="text-muted-foreground">Experience in project acquisition</p>
             </Card>
-            
+
             <Card className="p-6 text-center shadow-md hover:shadow-elegant transition-smooth">
               <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8 text-secondary" />
@@ -36,7 +39,7 @@ const About = () => {
               <h3 className="text-xl font-semibold mb-2">Global Clients</h3>
               <p className="text-muted-foreground">From Pakistan to worldwide partnerships</p>
             </Card>
-            
+
             <Card className="p-6 text-center shadow-md hover:shadow-elegant transition-smooth">
               <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-4">
                 <Zap className="w-8 h-8 text-success" />

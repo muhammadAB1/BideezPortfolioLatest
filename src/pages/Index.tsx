@@ -1,16 +1,15 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Impact from "@/components/Impact";
 import Team from "@/components/Team";
 import Vision from "@/components/Vision";
-import Portfolio from "@/components/Portfolio";
 import CEO from "@/components/CEO";
 import Testimonials from "@/components/Testimonial";
-import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import LinkedInFloat from "@/components/LinkedinFloat";
-import Training from "@/components/Training";
+// import Training from "@/components/Training";
 
 const Index = () => {
   return (
@@ -18,13 +17,12 @@ const Index = () => {
       <Navigation />
       <Hero />
       <About />
+      <Impact />
       <Team />
       <Vision />
-      <Portfolio />
       <CEO />
       <Testimonials />
-      <Blog />
-      <Training />
+      {/* <Training /> */}
       <Contact />
       <Footer />
       <LinkedInFloat />
