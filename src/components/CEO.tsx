@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Linkedin, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import img1 from "../images/AliLead.png";
