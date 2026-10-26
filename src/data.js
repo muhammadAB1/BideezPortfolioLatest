@@ -298,62 +298,7 @@ export const CASES = [
 // Featured on the homepage: one per channel, mixed so no single channel dominates.
 export const FEATURED = ['ai-powered-full-stack-developer-python-node-react', 'roofing-lead-generation-meta', 'fashion-store-google-127k', 'fashion-store-meta-black-friday']
 
-export const BLOG_CATEGORIES = ['Upwork', 'Lead Generation', 'Digital Marketing', 'Business Growth']
-
-export const POSTS = [
-  {
-    slug: 'how-to-write-an-upwork-proposal-that-gets-read',
-    category: 'Upwork',
-    title: 'How to Write an Upwork Proposal That Gets Read',
-    excerpt: 'A practical structure for proposals that speak to the client instead of repeating your resume.',
-    body: [
-      'Most Upwork clients open dozens of proposals for a single job and decide in seconds which ones to read. The proposals that get replies usually share one trait: they are about the client’s problem, not about the freelancer.',
-      'Start with the first two lines, which are all the client sees in the preview. Mention something specific from the job post, such as the product, the technology or the outcome they described, to show you read it.',
-      'Next, explain briefly how you would approach the work and why your experience is relevant. One or two examples of similar projects are more useful than a long list of skills.',
-      'Close with a clear next step, such as a question about scope or an offer of a short call. Keep the whole proposal short, easy to scan and free of copy-pasted paragraphs.',
-      'Finally, review what you send. Track which proposals get responses, adjust your openings and keep improving over time.',
-    ],
-  },
-  {
-    slug: 'building-a-b2b-email-outreach-sequence',
-    category: 'Lead Generation',
-    title: 'Building a B2B Email Outreach Sequence That Respects the Reader',
-    excerpt: 'Define the audience, write one clear message and plan follow-ups, while staying compliant.',
-    body: [
-      'Good outreach starts before the first email is written. Decide exactly who you are writing to, what problem they have and why your service is relevant to them now.',
-      'Keep the first message short and focused on a single idea. Say who you are, why you are writing to them specifically and what you are asking for, ideally a simple reply rather than a big commitment.',
-      'Plan two or three follow-ups. Many replies come after a reminder, so each follow-up should add something new, such as a relevant example or a different angle, instead of repeating the first message.',
-      'Technical setup matters as much as writing. Use a properly authenticated sending domain, keep lists clean and avoid sending large volumes from a new domain.',
-      'Always make your identity clear, include a simple way to opt out and follow the email regulations that apply to your target market.',
-    ],
-  },
-  {
-    slug: 'google-ads-or-meta-ads',
-    category: 'Digital Marketing',
-    title: 'Google Ads or Meta Ads: Which Should You Start With?',
-    excerpt: 'The two platforms reach people in different moments. Here is how to think about the choice.',
-    body: [
-      'Google Ads and Meta Ads are often discussed as alternatives, but they reach people in different situations.',
-      'Google Ads reaches people who are actively searching. If your potential customers type what you offer into a search engine, search campaigns put you in front of them at the moment they are looking.',
-      'Meta Ads, on Facebook and Instagram, reach people based on location, interests and profile rather than a search. They are useful for building visibility and reaching audiences who may not yet be searching for a solution.',
-      'If your service is something people actively look for, Google is usually a natural starting point. If you need to create awareness or reach a defined audience, Meta can work well. Many businesses eventually use both.',
-      'Whichever you choose, set a clear objective, install conversion tracking and review results before increasing the budget.',
-    ],
-  },
-  {
-    slug: 'building-a-consistent-client-acquisition-routine',
-    category: 'Business Growth',
-    title: 'Building a Consistent Client Acquisition Routine',
-    excerpt: 'Reliable growth usually comes from a few channels run steadily, not many channels run occasionally.',
-    body: [
-      'Many service businesses win clients in bursts: a busy period of outreach, then a quiet one while the team delivers projects. The result is an uneven pipeline.',
-      'A steadier approach starts by choosing a small number of channels that fit your market, such as Upwork, email outreach or paid advertising, and committing to them with a regular routine.',
-      'Define what you will do each week, who is responsible and how you will review it. Even simple tracking, such as proposals sent, conversations started and meetings booked, shows where to improve.',
-      'Keep your message consistent across channels so potential clients see the same offer wherever they find you.',
-      'If your team is busy delivering, consider outsourcing parts of the routine so client acquisition does not stop when delivery picks up.',
-    ],
-  },
-]
+// Blog content comes from WordPress at build time (scripts/fetch-wp.mjs -> src/generated/). No articles live in this file.
 
 export const FAQ = [
   ['Who does Bideez work with?', 'Software houses, IT companies, digital marketing agencies, professional service businesses, and small and local businesses such as gyms, spas, salons, law firms and dental clinics.'],
@@ -413,8 +358,7 @@ export function allRoutes() {
   }
   for (const i of INDUSTRIES) routes.push({ path: `/industries/${i.slug}`, title: `${i.title} | Bideez`, desc: i.desc })
   for (const c of CASES) routes.push({ path: `/portfolio/${c.slug}`, title: `${c.title} | Portfolio | Bideez`, desc: `${c.tag}: ${c.title}, ${c.headline} ${c.headlineLabel}.` })
-  for (const p of POSTS) routes.push({ path: `/blog/${p.slug}`, title: `${p.title} | Bideez`, desc: p.excerpt })
-  return routes
+  return routes // blog routes are added by scripts/postbuild.mjs from the WordPress data
 }
 
 // Verified testimonials. Avatars are monograms (initials) for every entry so all cards share one layout;

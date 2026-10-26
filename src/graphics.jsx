@@ -357,3 +357,30 @@ export const BrandIcon = ({ name, size = 26 }) => (
     )}
   </svg>
 )
+/* Fallback cover for blog posts without a featured image (deterministic per post) */
+export function BlogCover({ seed = '' }) {
+  const palettes = [['#0b2a5b', '#2f6fe0'], ['#123a7a', '#d96a12'], ['#0b2a5b', '#1b8a73']]
+  let h = 0
+  for (const ch of seed) h = (h * 31 + ch.charCodeAt(0)) >>> 0
+  const [a, b] = palettes[h % palettes.length]
+  const id = `bc-${h % palettes.length}`
+  return (
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Bideez article" style={{ display: 'block', width: '100%', height: '100%' }}>
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor={a} /><stop offset="1" stopColor={b} /></linearGradient>
+        <pattern id={`${id}-d`} width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#fff" opacity=".2" /></pattern>
+      </defs>
+      <rect width="400" height="225" fill={`url(#${id})`} />
+      <rect width="400" height="225" fill={`url(#${id}-d)`} />
+      <circle cx="330" cy="40" r="90" fill="#fff" opacity=".08" />
+      <rect x="110" y="52" width="180" height="121" rx="14" fill="#fff" opacity=".95" />
+      <rect x="128" y="72" width="70" height="9" rx="4.5" fill="#cfd9ea" />
+      <rect x="128" y="92" width="144" height="7" rx="3.5" fill="#e3ebf8" />
+      <rect x="128" y="106" width="120" height="7" rx="3.5" fill="#e3ebf8" />
+      <rect x="128" y="120" width="136" height="7" rx="3.5" fill="#e3ebf8" />
+      <rect x="128" y="142" width="54" height="16" rx="8" fill="#f57c1f" />
+      <circle cx="282" cy="62" r="20" fill="#f57c1f" />
+      <g transform="translate(270 50)" color="#fff"><Icon name="pen" size={24} /></g>
+    </svg>
+  )
+}

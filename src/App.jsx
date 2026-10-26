@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink, Route, Routes, useLocation, useParams } from 'react-router-dom'
-import { BLOG_CATEGORIES, CASES, CASE_FILTERS, FAQ, FEATURED, HOME, INDUSTRIES, LEADERS, MANAGEMENT, PAGES, PORTFOLIO_DISCLAIMER, POSTS, SERVICES, SITE, STEPS, TEAM, TESTIMONIALS, WHY } from './data.js'
+import { Link, NavLink, Route, Routes, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { CASES, CASE_FILTERS, FAQ, FEATURED, HOME, INDUSTRIES, LEADERS, MANAGEMENT, PAGES, PORTFOLIO_DISCLAIMER, SERVICES, SITE, STEPS, TEAM, TESTIMONIALS, WHY } from './data.js'
 import { PRIVACY } from './legal.js'
 
 const initials = (name) => (([first, ...rest]) => (first[0] + (rest.length ? rest[rest.length - 1][0] : '')).toUpperCase())(name.split(' ').filter(Boolean))
-import { BrandIcon, CtaArt, HeroArt, HeroPattern, Icon, IconBadge, IndustryArt, NetworkArt } from './graphics.jsx'
+import blogIndex from './generated/blog-index.json'
+import { BlogCover, BrandIcon, CtaArt, HeroArt, HeroPattern, Icon, IconBadge, IndustryArt, NetworkArt } from './graphics.jsx'
 
 const featuredCases = () => FEATURED.map((s) => CASES.find((c) => c.slug === s)).filter(Boolean)
 // Which portfolio items each service page shows. Email has no standalone work, so it shows the
@@ -29,6 +30,19 @@ function useMeta(title, desc) {
     }
     m.content = desc
   }, [title, desc])
+}
+
+// Keeps <link rel="canonical"> correct during in-app navigation (static pages already ship the right one).
+function useCanonical(path) {
+  useEffect(() => {
+    let l = document.querySelector('link[rel="canonical"]')
+    if (!l) {
+      l = document.createElement('link')
+      l.rel = 'canonical'
+      document.head.appendChild(l)
+    }
+    l.href = `${SITE.url}${path}`
+  }, [path])
 }
 
 function ScrollTop() {
@@ -611,23 +625,58 @@ function About() {
   )
 }
 
+/* ---------- blog (content comes from WordPress at build time) ---------- */
+const fmtDate = (iso) => {
+  const d = new Date(iso)
+  return Number.isNaN(d.getTime()) ? '' : new Intl.DateTimeFormat('en-GB', { dateStyle: 'long', timeZone: 'UTC' }).format(d)
+}
+// One lazy chunk per article, so the listing page never downloads every article body.
+const postModules = import.meta.glob('./generated/posts/*.json')
+const PAGE_SIZE = 9
+
+const BlogCard = ({ p }) => (
+  <Link to={`/blog/${p.slug}`} className="card blog-card">
+    <div className="blog-thumb">
+      {p.image ? <img src={p.image.card} alt={p.image.alt || ''} loading="lazy" decoding="async" /> : <BlogCover seed={p.slug} />}
+    </div>
+    <div className="case-body">
+      <p className="tag">{p.categories[0]?.name || 'Article'}</p>
+      <h3>{p.title}</h3>
+      {p.excerpt && <p>{p.excerpt}</p>}
+      <p className="meta">{fmtDate(p.date)} · {p.readingMinutes} min read</p>
+    </div>
+  </Link>
+)
+
 function Blog() {
   useMeta(PAGES['/blog'].title, PAGES['/blog'].desc)
-  const [cat, setCat] = useState('All')
-  const list = cat === 'All' ? POSTS : POSTS.filter((p) => p.category === cat)
+  useCanonical('/blog')
+  const [params, setParams] = useSearchParams()
+  const [shown, setShown] = useState(PAGE_SIZE)
+  const { posts, categories } = blogIndex
+  const active = categories.some((c) => c.slug === params.get('category')) ? params.get('category') : 'all'
+  const list = active === 'all' ? posts : posts.filter((p) => p.categories.some((c) => c.slug === active))
+  const choose = (slug) => {
+    setShown(PAGE_SIZE)
+    setParams(slug === 'all' ? {} : { category: slug })
+  }
   return (
     <>
       <Hero eyebrow="Blog" title="Insights" lead="Practical articles on Upwork, lead generation, digital marketing and business growth." />
       <Section>
-        <div className="chips">
-          {['All', ...BLOG_CATEGORIES].map((c) => <button key={c} className={`chip${cat === c ? ' on' : ''}`} onClick={() => setCat(c)}>{c}</button>)}
-        </div>
-        {list.length === 0 ? <div className="notice">No articles in this category yet.</div> : (
-          <div className="grid3">
-            {list.map((p) => (
-              <Link key={p.slug} to={`/blog/${p.slug}`} className="card"><p className="tag">{p.category}</p><h3>{p.title}</h3><p>{p.excerpt}</p><span className="more">Read article <Icon name="arrow" size={16} /></span></Link>
-            ))}
-          </div>
+        {posts.length === 0 ? (
+          <div className="notice">Articles are coming soon. Check back shortly.</div>
+        ) : (
+          <>
+            {categories.length > 0 && (
+              <div className="chips" role="group" aria-label="Filter articles by category">
+                <button className={`chip${active === 'all' ? ' on' : ''}`} onClick={() => choose('all')}>All <small>{posts.length}</small></button>
+                {categories.map((c) => <button key={c.slug} className={`chip${active === c.slug ? ' on' : ''}`} onClick={() => choose(c.slug)}>{c.name} <small>{c.count}</small></button>)}
+              </div>
+            )}
+            <div className="grid3 cases">{list.slice(0, shown).map((p) => <BlogCard key={p.slug} p={p} />)}</div>
+            {list.length > shown && <div className="actions center-actions"><button className="btn btn-ghost" onClick={() => setShown(shown + PAGE_SIZE)}>Load more articles</button></div>}
+          </>
         )}
       </Section>
     </>
@@ -636,18 +685,63 @@ function Blog() {
 
 function Post() {
   const { slug } = useParams()
-  const p = POSTS.find((x) => x.slug === slug)
-  useMeta(p ? `${p.title} | Bideez` : 'Not found | Bideez', p?.excerpt || '')
-  if (!p) return <NotFound />
+  const navigate = useNavigate()
+  const meta = blogIndex.posts.find((x) => x.slug === slug)
+  const [post, setPost] = useState(null)
+  const [failed, setFailed] = useState(false)
+  useMeta(meta ? `${meta.title} | Bideez` : 'Not found | Bideez', meta?.excerpt || '')
+  useCanonical(`/blog/${slug}`)
+  useEffect(() => {
+    setPost(null)
+    setFailed(false)
+    const load = postModules[`./generated/posts/${slug}.json`]
+    if (!load) {
+      setFailed(true)
+      return undefined
+    }
+    let live = true
+    load().then((m) => { if (live) setPost(m.default) }).catch(() => { if (live) setFailed(true) })
+    return () => {
+      live = false
+    }
+  }, [slug])
+  if (!meta || failed) return <NotFound />
+  const related = blogIndex.posts.filter((x) => x.slug !== slug && x.categories.some((c) => meta.categories.some((m) => m.slug === c.slug))).slice(0, 3)
+  // Links inside article HTML are plain anchors; keep internal ones inside the single-page app.
+  const onContentClick = (e) => {
+    const a = e.target.closest?.('a')
+    const href = a?.getAttribute('href')
+    if (href && href.startsWith('/') && !href.startsWith('//') && a.target !== '_blank') {
+      e.preventDefault()
+      navigate(href)
+    }
+  }
   return (
     <>
-      <Hero eyebrow={p.category} title={p.title}><Crumbs items={[['Blog', '/blog'], [p.title]]} /></Hero>
-      <Section>{p.body.map((t, i) => <p className="prose article" key={i}>{t}</p>)}</Section>
+      <Hero eyebrow={meta.categories[0]?.name || 'Article'} title={meta.title}>
+        <Crumbs items={[['Blog', '/blog'], [meta.title]]} />
+        <p className="post-meta">{fmtDate(meta.date)} · {meta.readingMinutes} min read</p>
+      </Hero>
+      <Section>
+        <article className="article-wrap">
+          {meta.image && (
+            <figure className="post-hero">
+              <img src={meta.image.url} alt={meta.image.alt || meta.title} width={meta.image.width || undefined} height={meta.image.height || undefined} decoding="async" />
+            </figure>
+          )}
+          {post ? <div className="wp-content" onClick={onContentClick} dangerouslySetInnerHTML={{ __html: post.contentHtml }} /> : <p className="hint">Loading article…</p>}
+          {meta.categories.length > 0 && (
+            <div className="chips post-cats">
+              {meta.categories.map((c) => <Link key={c.slug} className="chip" to={`/blog?category=${c.slug}`}>{c.name}</Link>)}
+            </div>
+          )}
+        </article>
+      </Section>
+      {related.length > 0 && <Section alt title="Related articles"><div className="grid3 cases">{related.map((p) => <BlogCard key={p.slug} p={p} />)}</div></Section>}
       <FinalCta />
     </>
   )
 }
-
 // Messages are delivered to SITE.email by an email-forwarding service. Set VITE_FORM_ENDPOINT to use a
 // different one (for example your own server function). FormSubmit needs a one-time activation:
 // the first submission sends a confirmation email to SITE.email that must be approved.
