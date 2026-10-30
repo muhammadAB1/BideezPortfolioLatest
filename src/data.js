@@ -392,7 +392,7 @@ export const TEAM = [
   { name: 'Dania Irfan', role: 'Content Creator' },
 ]
 export const PAGES = {
-  '/': { title: 'Bideez | Upwork Bidding, Email Marketing, Meta Ads & Google Ads', desc: 'Bideez is a business development and digital advertising company, established in 2018, helping businesses find clients through Upwork bidding, email marketing, Meta Ads and Google Ads.' },
+  '/': { title: 'Bideez | Upwork Bidding, Email Marketing, Meta Ads & Google Ads', desc: 'Bideez is a business development and digital advertising company, established in 2018, helping businesses find clients and grow sales through Upwork bidding, email marketing, Meta Ads and Google Ads.' },
   '/services': { title: 'Services | Bideez', desc: 'Upwork bidding, email marketing, Meta Ads and Google Ads from Bideez.' },
   '/industries': { title: 'Industries We Support | Bideez', desc: 'Business development for software houses, IT companies, digital marketing agencies, professional service firms, and small and local businesses such as gyms, spas, salons, lawyers and dentists.' },
   '/portfolio': { title: 'Portfolio | Bideez', desc: 'Selected Bideez projects across Upwork bidding, email marketing, Meta Ads and Google Ads.' },

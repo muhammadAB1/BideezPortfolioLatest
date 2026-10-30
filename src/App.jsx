@@ -261,9 +261,9 @@ const IndustryCard = ({ i }) => (
     </div>
   </Link>
 )
-const CaseCard = ({ c }) => (
-  <Link to={`/portfolio/${c.slug}`} className={`card case ${c.kind}`}>
-    <div className="shot"><img src={c.image} alt={`${c.title} results screenshot`} loading="lazy" /><span className="shot-badge">{c.platform}</span></div>
+const CaseCard = ({ c, eager }) => (
+  <Link to={`/portfolio/${c.slug}`} className={`card case ${c.kind}${c.platform === 'Upwork' ? '' : ' ad'}`}>
+    <div className="shot"><img src={c.image} alt={`${c.title} results screenshot`} loading={eager ? 'eager' : 'lazy'} decoding="async" /><span className="shot-badge">{c.platform}</span></div>
     <div className="case-body">
       <p className="metric">{c.headline}</p>
       <p className="metric-label">{c.headlineLabel}</p>
@@ -280,6 +280,57 @@ const StatGrid = ({ stats }) => (
 )
 
 /* ---------- pages ---------- */
+const HERO_PROOF = [
+  ['Meta Ads', '$1.6M+', 'in sales from Meta Ads*'],
+  ['Google Ads', '$5.3M+', 'in sales from Google Ads*'],
+  ['Upwork', '$2.9M+', 'earned on Upwork profiles we manage*'],
+]
+const PROOF_BAR = [
+  ['$2.9M+', 'Upwork earnings across 6 managed profiles*'],
+  ['92,000+', 'hours logged on those profiles*'],
+  ['€5.1M+', 'Meta & Google sales, EUR accounts**'],
+  ['10,000+', 'Upwork proposals managed'],
+]
+
+function HeroProof() {
+  return (
+    <figure className="hx-visual">
+      <div className="hx-frame">
+        <div className="frame-bar"><i /><i /><i /></div>
+        <img src="/proof/store-sales.jpg" width="782" height="538" fetchPriority="high" decoding="async" alt="Shopify analytics chart: total sales of $670,828.16, up 51% compared with the previous period, 30 September to 30 October 2026" />
+      </div>
+      <span className="hx-chip hx-chip-up"><strong>+51%</strong> vs previous period</span>
+      <figcaption>Client store results from Shopify analytics. Results vary by business.</figcaption>
+    </figure>
+  )
+}
+
+function BookingBand() {
+  return (
+    <section className="section">
+      <div className="wrap">
+        <div className="bandcta">
+          <div>
+            <p className="eyebrow">Next step</p>
+            <h2>Want results like these for your business?</h2>
+            <p>Book a consultation. We look at where you are today and recommend the right channel for your goals.</p>
+            <ul className="ticks">
+              <li>A short conversation about your goals and your audience</li>
+              <li>A recommendation: Upwork bidding, email, Meta Ads or Google Ads</li>
+              <li>Clear next steps for how we would work together</li>
+            </ul>
+          </div>
+          <div className="bandcta-actions">
+            <Cta>Book a Consultation</Cta>
+            <Cta to="/contact" ghost>Or send us a message</Cta>
+            <p className="hx-note">Tell us your goals. We will recommend the right channel.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Home() {
   useMeta(PAGES['/'].title, PAGES['/'].desc)
   const pm = SERVICES.find((s) => s.slug === 'performance-marketing')
@@ -288,14 +339,59 @@ function Home() {
       <section className="hero">
         <div className="wrap hero-grid">
           <div>
-            <p className="eyebrow">{HOME.eyebrow}</p>
-            <h1>{HOME.title}</h1>
-            <p className="lead">{HOME.lead}</p>
-            <div className="actions"><Cta /><Cta to="/services" ghost>Explore Our Services</Cta></div>
+            <p className="eyebrow">{HOME.eyebrow} · Since 2018</p>
+            <h1>$9M+ in Client Sales &amp; Earnings. Let’s Grow Yours.</h1>
+            <p className="lead">Bideez helps software houses, agencies and online stores win qualified clients and sales through Upwork bidding, email marketing, Meta Ads and Google Ads.</p>
+            <div className="actions"><Cta /><Cta to="/portfolio" ghost>See Our Results</Cta></div>
+            <p className="hx-note">Tell us your goals. We will recommend the right channel.</p>
+            <ul className="hx-stats">
+              {HERO_PROOF.map(([k, v, l]) => <li key={k}><em>{k}</em><strong>{v}</strong><span>{l}</span></li>)}
+            </ul>
+            <p className="hx-foot">* Upwork and Google Ads totals come from the profiles and accounts in our <Link to="/portfolio">portfolio</Link>; the Meta Ads total covers the Meta accounts we manage. Euro amounts are counted 1:1 with dollars. Results vary and are not guaranteed.</p>
           </div>
-          <HeroArt />
+          <HeroProof />
         </div>
       </section>
+
+      <section className="proofbar" aria-label="Results at a glance">
+        <div className="wrap">
+          <p className="proof-title">Proof over promises</p>
+          <div className="proof-grid">
+            {PROOF_BAR.map(([v, l]) => <div key={l}><strong>{v}</strong><span>{l}</span></div>)}
+          </div>
+          <p className="hint fine">* Minimum totals taken from the profile screenshots in our portfolio. ** Purchase conversion values reported in the euro-based ad accounts shown in our case studies; lead-generation campaigns are excluded. Results vary and are not guaranteed.</p>
+        </div>
+      </section>
+
+      <Section center title="Results From Our Work" intro="Real accounts and profiles, with the numbers shown in the screenshots. Names are withheld to protect client privacy.">
+        <div className="grid4">{featuredCases().map((c) => <CaseCard key={c.slug} c={c} />)}</div>
+        <div className="actions center-actions"><Cta to="/portfolio">View All Case Studies</Cta></div>
+      </Section>
+
+      <Section alt center title="Services That Bring In Clients and Sales" intro="Choose one channel or combine them. Each is planned around your business objectives.">
+        <div className="grid4">
+          <ServiceCard s={SERVICES[0]} to="/services/upwork-bidding" />
+          <ServiceCard s={SERVICES[1]} to="/services/email-marketing" />
+          <ServiceCard s={pm.children[1]} to="/services/performance-marketing/meta-ads" />
+          <ServiceCard s={pm.children[0]} to="/services/performance-marketing/google-ads" />
+        </div>
+      </Section>
+
+      <Testimonials />
+
+      <BookingBand />
+
+      <Section alt center title="A Clear Process From Planning to Execution">
+        <div className="book-grid cols4">{STEPS.map(([icon, t, d], i) => <BookCard key={t} icon={icon} title={t} text={d} num={i + 1} />)}</div>
+      </Section>
+
+      <Section center title="Why Bideez" intro="Focused on helping businesses find opportunities.">
+        <WhyRing />
+      </Section>
+
+      <Section alt center title="Who We Help">
+        <div className="grid4">{INDUSTRIES.map((i) => <IndustryCard key={i.slug} i={i} />)}</div>
+      </Section>
 
       <Section>
         <div className="split">
@@ -309,39 +405,11 @@ function Home() {
         </div>
       </Section>
 
-      <Section alt center title="Services That Support Your Business Growth" intro="Choose one channel or combine them. Each is planned around your business objectives.">
-        <div className="grid4">
-          <ServiceCard s={SERVICES[0]} to="/services/upwork-bidding" />
-          <ServiceCard s={SERVICES[1]} to="/services/email-marketing" />
-          <ServiceCard s={pm.children[1]} to="/services/performance-marketing/meta-ads" />
-          <ServiceCard s={pm.children[0]} to="/services/performance-marketing/google-ads" />
-        </div>
-      </Section>
-
-      <Section center title="Supporting Businesses Across Different Industries">
-        <div className="grid4">{INDUSTRIES.map((i) => <IndustryCard key={i.slug} i={i} />)}</div>
-      </Section>
-
-      <Section alt center title="Why Bideez" intro="Focused on helping businesses find opportunities.">
-        <WhyRing />
-      </Section>
-
-      <Section center title="A Clear Process From Planning to Execution">
-        <div className="book-grid cols4">{STEPS.map(([icon, t, d], i) => <BookCard key={t} icon={icon} title={t} text={d} num={i + 1} />)}</div>
-      </Section>
-
-      <Section alt center title="Our Work. Our Experience." intro="Explore selected projects from our lead generation and advertising work across Upwork, Meta Ads and Google Ads. Each case study highlights the project, our approach and the results shown in the account.">
-        <div className="grid4">{featuredCases().map((c) => <CaseCard key={c.slug} c={c} />)}</div>
-        <div className="actions center-actions"><Cta to="/portfolio">Explore Our Portfolio</Cta></div>
-      </Section>
-
-      <Testimonials />
       <Faq alt />
       <FinalCta />
     </>
   )
 }
-
 function Faq({ items = FAQ, title = 'Frequently Asked Questions', alt }) {
   return (
     <Section title={title} alt={alt}>
@@ -486,6 +554,8 @@ function Portfolio() {
   const [f, setF] = useState('All')
   const list = f === 'All' ? CASES : CASES.filter((c) => c.platform === f)
   const count = (n) => (n === 'All' ? CASES.length : CASES.filter((c) => c.platform === n).length)
+  const adsFirst = [...CASES.filter((c) => c.platform === 'Google Ads'), ...CASES.filter((c) => c.platform === 'Meta Ads')]
+  const upworkCases = CASES.filter((c) => c.platform === 'Upwork')
   return (
     <>
       <Hero eyebrow="Portfolio" title="Our Work. Our Experience." lead="Selected lead generation and advertising projects across Upwork, Meta Ads and Google Ads, with the results shown in the accounts." />
@@ -503,7 +573,19 @@ function Portfolio() {
           {CASE_FILTERS.map((n) => <button key={n} className={`chip${f === n ? ' on' : ''}`} onClick={() => setF(n)}>{n} <small>{count(n)}</small></button>)}
         </div>
         <div className="notice privacy-note"><strong>Privacy first.</strong> To protect the confidentiality of our clients and the freelancers we support, names, photos and other identifying details are withheld, and screenshots are shown with personal information blurred. Each project is identified by its specialty and results instead.</div>
-        <div className="grid3 cases">{list.map((c) => <CaseCard key={c.slug} c={c} />)}</div>
+        {f === 'All' ? (
+          <>
+            <div className="pf-banner">
+              <div><p className="pf-kicker">Featured results</p><h2>Google Ads &amp; Meta Ads portfolio</h2><p>Revenue and lead-generation campaigns. The cards below show selected accounts, with the numbers shown in the ad accounts.</p></div>
+              <ul><li><strong>$5.3M+</strong><span>Google Ads sales (case studies)</span></li><li><strong>$1.6M+</strong><span>Meta Ads sales (all managed accounts)</span></li><li><strong>1,000+</strong><span>Meta leads, one campaign</span></li></ul>
+            </div>
+            <div className="grid3 cases ads">{adsFirst.map((c) => <CaseCard key={c.slug} c={c} eager />)}</div>
+            <div className="pf-sub"><h2>Upwork profile management</h2><p>Managed Upwork profiles and what they have earned.</p></div>
+            <div className="grid3 cases">{upworkCases.map((c) => <CaseCard key={c.slug} c={c} eager />)}</div>
+          </>
+        ) : (
+          <div className="grid3 cases">{list.map((c) => <CaseCard key={c.slug} c={c} eager />)}</div>
+        )}
         <p className="hint fine">* Totals are calculated from the figures shown on the six Upwork profiles. Combined earnings are a minimum and exclude one profile that does not display earnings.</p>
         <p className="hint fine">** Sales are the purchase conversion values reported in the ad-account screenshots for the Meta Ads and Google Ads ecommerce case studies, added up separately by the currency each account reports. They exclude the lead-generation campaign, which reports leads rather than sales. {PORTFOLIO_DISCLAIMER.ads}</p>
       </Section>
